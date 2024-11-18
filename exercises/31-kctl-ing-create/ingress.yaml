@@ -1,0 +1,19 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: dumpster-ing
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /
+  labels:
+    workshop: "true"
+spec:
+  rules:
+  - http:
+      paths:
+      - pathType: Prefix
+        path: "/v1"
+        backend:
+          service:
+            name: svc-v1
+            port:
+              number: 8080
